@@ -1,0 +1,5 @@
+<!-- 切换路由显示loading -->
+<div id="all-loading-container" [class.hide]="!allLoading">
+  <nz-spin [class.all-loading]="allLoading" [nzSpinning]="allLoading" [nzSize]="'large'" [nzTip]="'加载中...'"></nz-spin>
+  <router-outlet></router-outlet>
+</div>
