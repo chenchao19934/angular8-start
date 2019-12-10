@@ -25,6 +25,8 @@ import { HelperService } from '../utils/httpInterceptor/helper.service';
 import { Params } from '../utils/params.service';
 import { PreloadingStrategyService } from './preloading-strategy.service';
 
+import { AppRouterGurad } from './app.gurad';
+
 registerLocaleData(zh);
 
 const icons: IconDefinition[] = [
@@ -74,7 +76,8 @@ const APP_PROVIDERS: Array<any> = [
       multi: true,
     },
     Params,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    AppRouterGurad
   ],
   bootstrap: [AppComponent],
 })
