@@ -25,25 +25,25 @@ export class AppComponent implements OnInit {
   public routerChange() {
     // 单独监听NavigationStart事件
     this.router.events.pipe(
-      filter((event) => event instanceof NavigationStart),
+      filter((event: any) => event instanceof NavigationStart),
       map(() => this.activatedRoute),
       map((route: any) => {
         while (route.firstChild) route = route.firstChild;
         return route;
       }),
-    ).subscribe((event) => {
+    ).subscribe((event: any) => {
       this.allLoading = true;
       console.log(this.allLoading);
     });
 
     this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd),
+      filter((event: any) => event instanceof NavigationEnd),
       map(() => this.activatedRoute),
       map((route: any) => {
         while (route.firstChild) route = route.firstChild;
         return route;
       })
-    ).subscribe((event) => {
+    ).subscribe((event: any) => {
       this.allLoading = false;
       console.log(this.allLoading);
       // 消除脏查机制
@@ -51,13 +51,13 @@ export class AppComponent implements OnInit {
     });
 
     this.router.events.pipe(
-      filter((event) => event instanceof NavigationCancel),
+      filter((event: any) => event instanceof NavigationCancel),
       map(() => this.activatedRoute),
       map((route: any) => {
         while (route.firstChild) route = route.firstChild;
         return route;
       }),
-    ).subscribe((event) => {
+    ).subscribe((event: any) => {
       this.allLoading = false;
       console.log(this.allLoading);
       // 消除脏查机制
