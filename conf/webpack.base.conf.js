@@ -23,6 +23,8 @@ const config = {
 
   devtool: _PROD_ ? false : 'cheap-module-eval-source-map',
 
+  mode: process.env.NODE_ENV,
+
   resolve: {
     extensions: ['.ts', '.js'],
     modules: [path.resolve(process.cwd(), "src"), "node_modules"],
@@ -148,9 +150,11 @@ const config = {
       skipCodeGeneration: true,
       sourceMap: _DEV_ ? true : false
     }),
+
     new MiniCssExtractPlugin({
       filename: "static/css/[name].[contenthash].css",
     }),
+
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
@@ -158,6 +162,7 @@ const config = {
       },
       _DEV_: JSON.stringify(_DEV_),
     }),
+    
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),

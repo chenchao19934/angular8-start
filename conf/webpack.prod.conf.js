@@ -1,25 +1,22 @@
-const path = require('path'),
-  webpack = require('webpack'),
-  config = require('./webpack.base.conf.js'),
-  UglifyJsPlugin = require("uglifyjs-webpack-plugin"),
-  HtmlWebpackPlugin = require("html-webpack-plugin"),
-  CleanWebpackPlugin = require('clean-webpack-plugin'),
-  OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
-  SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const config = require('./webpack.base.conf.js');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const _PROD_ = process.env.NODE_ENV === 'production'
 
-config.mode = 'production'
 config.plugins = (config.plugins || []).concat([
-  new CleanWebpackPlugin(['dist/*'],
-  {
+  new CleanWebpackPlugin(['dist/*'], {
     root: path.join(__dirname, '../'),
-    verbose:  true,
-    dry:      false
+    verbose: true,
+    dry: false
   }),
-  new OptimizeCSSAssetsPlugin({
-    // cssProcessor: require('cssnano')({ autoprefixer: false })
-  }),
+  new OptimizeCSSAssetsPlugin({}),
+
   new UglifyJsPlugin({
     uglifyOptions: {
       compress: {
@@ -32,13 +29,15 @@ config.plugins = (config.plugins || []).concat([
     },
     parallel: true
   }),
+
   new webpack.HashedModuleIdsPlugin(),
-  // new webpack.NamedModulesPlugin(),
+
   new HtmlWebpackPlugin({
-      title: 'CMS-管理后台',
-      filename: 'index.html',
-      template: 'src/template/index_base.html',
+    title: 'CMS-管理后台',
+    filename: 'index.html',
+    template: 'src/template/index_base.html',
   }),
+
   new SWPrecacheWebpackPlugin({
     cacheId: 'ngadmin-sw',
     dontCacheBustUrlsMatching: /\.\w{8}\./,

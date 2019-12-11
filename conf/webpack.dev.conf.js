@@ -1,9 +1,8 @@
-const path = require('path'),
-  webpack = require('webpack'),
-  HtmlWebpackPlugin = require("html-webpack-plugin"),
-  config = require('./webpack.base.conf.js');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const config = require('./webpack.base.conf.js');
 
-config.mode = 'development'
 config.devServer = {
   port: '8888',
   host: 'localhost',
